@@ -1,7 +1,19 @@
 import React from 'react';
 
-const PostsContainer = () => (
-    <div>POSTS CONTAINER</div>
-);
+import "./posts-container.styles.scss";
+
+import Post from "../post/post.component";
+
+class PostsContainer extends React.Component {
+    render() {
+        return (
+            <div>
+                <Post />
+                <Post />
+                <Post />
+            </div>
+        );
+    }
+}
 
 export default PostsContainer;
