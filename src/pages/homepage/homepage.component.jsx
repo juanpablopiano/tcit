@@ -2,12 +2,12 @@ import React from 'react';
 
 import "./homepage.styles.scss";
 
-import Header from "../../components/header/header.component";
+import SearchBar from "../../components/search-bar/search-bar.component";
 import PostsContainer from "../../components/posts-container/posts-container.component";
 
 const Homepage = () => (
     <div>
-        <Header />
+        <SearchBar />
         <PostsContainer />
     </div>
 )

@@ -1,11 +1,11 @@
 import React from "react";
 
-import "./header.styles.scss";
+import "./search-bar.styles.scss";
 
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 
-class Header extends React.Component {
+class SearchBar extends React.Component {
 	constructor() {
 		super();
 
@@ -28,21 +28,20 @@ class Header extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<form>
+			<div className="header">
+				<form onSubmit={this.handleSubmit}>
 					<FormInput
 						name="searchText"
 						type="text"
 						handleChange={this.handleChange}
 						value={this.state.searchText}
 						label="Filtro de Nombre"
-						required
 					/>
-					<CustomButton type="submit" >Buscar</CustomButton>
+					<CustomButton type="submit">Buscar</CustomButton>
 				</form>
 			</div>
 		);
 	}
 }
 
-export default Header;
+export default SearchBar;
