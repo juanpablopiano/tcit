@@ -6,6 +6,9 @@ $secondary-color: teal;
 	height: 400px;
     background-color: brown;
     overflow-y: auto;
+    border: 3px solid black;
+    box-sizing: border-box;
+    overflow: hidden;
 
 	table {
         width: 100%;
@@ -20,6 +23,7 @@ $secondary-color: teal;
             width: 100%;
             max-height: 360px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 		tr {
             height: 30px;
@@ -36,18 +40,22 @@ $secondary-color: teal;
 
 			th {
 				background-color: cornflowerblue;
-				border: 1px solid cornflowerblue;
 			}
 			td, th {
 				text-align: left;
                 padding: 10px;
-                border-left: 1px solid black;
+                border-right: 3px solid black;
+                box-sizing: border-box;
 
                 &:nth-child(1) {
                     width: 150px;
                 }
                 &:nth-child(2) {
-                    width: 400px;
+                    width: 700px;
+                    min-width: 60%;
+                }
+                &:last-child {
+                    border-right: none;
                 }
             }
             

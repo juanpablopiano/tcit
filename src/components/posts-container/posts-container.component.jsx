@@ -1,10 +1,39 @@
 import React from "react";
+import axios from "axios";
 
 import "./posts-container.styles.scss";
 
 import Post from "../post/post.component";
 
 class PostsContainer extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			posts: [],
+		};
+	}
+	async componentDidMount() {
+		try {
+			const posts = await axios.get("http://localhost:5000/posts");
+			this.setState({ posts: posts.data });
+		} catch (error) {
+			console.error(error.message);
+		}
+	}
+
+	handleDeletePost = async (id) => {
+		try {
+			await axios.delete(
+				`http://localhost:5000/posts/${id}`
+			);
+			const newPosts = [...this.state.posts];
+			this.setState({ posts: newPosts.filter(post => post.postId !== id) });
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	render() {
 		return (
 			<div className="post-container">
@@ -17,20 +46,16 @@ class PostsContainer extends React.Component {
 						</tr>
 					</thead>
 					<tbody>
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
-						<Post />
+						{this.state.posts.map(
+							({ postId, name, description }) => (
+								<Post
+									key={postId}
+									name={name}
+									description={description}
+									onDelete={() => this.handleDeletePost(postId)}
+								/>
+							)
+						)}
 					</tbody>
 				</table>
 			</div>

@@ -2,11 +2,11 @@ import React from 'react';
 
 import "./post.styles.scss";
 
-const Post = (props) => (
+const Post = ({ name, description, onDelete }) => (
     <tr>
-        <td>POST 1</td>
-        <td>Hola como estas</td>
-        <td><button>Eliminar</button></td>
+        <td>{ name }</td>
+        <td>{ description }</td>
+        <td><button onClick={onDelete}>Eliminar</button></td>
     </tr>
 );
 
