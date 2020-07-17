@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+// import { connect } from "react-redux";
+// import { createPost } from "../../redux/actions";
 
 import "./new-post-bar.styles.scss";
 
@@ -63,4 +65,10 @@ class NewPostBar extends React.Component {
 	}
 }
 
-export default NewPostBar;
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		onCreatePost: (post) => dispatch(createPost(post))
+// 	}
+// }
+
+export default (NewPostBar);
