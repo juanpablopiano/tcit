@@ -2,8 +2,8 @@ export const setPosts = (posts) => {
 	return { type: "SET_POSTS", posts };
 };
 
-export const deletePost = (postId) => {
-	return { type: "DELETE_POST", postId };
+export const deletePost = (id) => {
+	return { type: "DELETE_POST", id };
 };
 
 export const addPost = (post) => {

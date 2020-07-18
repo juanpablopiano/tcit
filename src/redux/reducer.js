@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				posts: state.posts.filter(
-					(post) => post.postId !== action.postId
+					(post) => post.id !== action.id
 				),
 			};
 		case "ADD_POST":

@@ -25,7 +25,7 @@ class PostsContainer extends React.Component {
 			const deletedPost = await axios.delete(
 				`http://localhost:5000/posts/${id}`
 			);
-			this.props.deletePost(deletedPost.data.postId);
+			this.props.deletePost(deletedPost.data.id);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -48,13 +48,13 @@ class PostsContainer extends React.Component {
 					</thead>
 					<tbody>
 						{filteredPosts.map(
-							({ postId, name, description }) => (
+							({ id, name, description }) => (
 								<Post
-									key={postId}
+									key={id}
 									name={name}
 									description={description}
 									onDelete={() =>
-										this.handleDeletePost(postId)
+										this.handleDeletePost(id)
 									}
 								/>
 							)
