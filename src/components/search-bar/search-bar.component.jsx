@@ -2,6 +2,11 @@ import React from "react";
 
 import "./search-bar.styles.scss";
 
+// setup of redux
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { changeSearchField } from "../../redux/actions";
+
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 
@@ -10,20 +15,20 @@ class SearchBar extends React.Component {
 		super();
 
 		this.state = {
-			searchText: ""
-		}
+			searchText: "",
+		};
 	}
 
 	handleSubmit = async (event) => {
 		event.preventDefault();
 
-		this.setState({ searchText: "" });
+		this.props.changeSearchField("");
 	};
 
 	handleChange = (event) => {
-		const { value, name } = event.target;
+		const { value } = event.target;
 
-		this.setState({ [name]: value });
+		this.props.changeSearchField(value);
 	};
 
 	render() {
@@ -34,7 +39,7 @@ class SearchBar extends React.Component {
 						name="searchText"
 						type="text"
 						handleChange={this.handleChange}
-						value={this.state.searchText}
+						value={this.props.searchField}
 						label="Filtro de Nombre"
 					/>
 					<CustomButton type="submit">Buscar</CustomButton>
@@ -44,4 +49,17 @@ class SearchBar extends React.Component {
 	}
 }
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+	return {
+		searchField: state.searchField,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(
+		{ changeSearchField: changeSearchField },
+		dispatch
+	);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

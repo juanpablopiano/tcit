@@ -4,7 +4,7 @@ import axios from "axios";
 // setup of redux
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setPosts } from "../../redux/actions";
+import { setPosts, deletePost } from "../../redux/actions";
 
 import "./posts-container.styles.scss";
 
@@ -14,9 +14,7 @@ class PostsContainer extends React.Component {
 	async componentDidMount() {
 		try {
 			const posts = await axios.get("http://localhost:5000/posts");
-			this.props.setPosts(posts.data)
-			// this.setState({ posts: posts.data });
-			// this.props.posts = posts;
+			this.props.setPosts(posts.data);
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -24,17 +22,20 @@ class PostsContainer extends React.Component {
 
 	handleDeletePost = async (id) => {
 		try {
-			await axios.delete(`http://localhost:5000/posts/${id}`);
-			const newPosts = [...this.state.posts];
-			this.setState({
-				posts: newPosts.filter((post) => post.postId !== id),
-			});
+			const deletedPost = await axios.delete(
+				`http://localhost:5000/posts/${id}`
+			);
+			this.props.deletePost(deletedPost.data.postId);
 		} catch (error) {
 			console.log(error.message);
 		}
 	};
 
 	render() {
+		const { searchField, posts } = this.props;
+		const filteredPosts = posts.filter((post) =>
+			post.name.toLowerCase().includes(searchField.toLowerCase())
+		);
 		return (
 			<div className="post-container">
 				<table>
@@ -46,7 +47,7 @@ class PostsContainer extends React.Component {
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.posts.map(
+						{filteredPosts.map(
 							({ postId, name, description }) => (
 								<Post
 									key={postId}
@@ -68,11 +69,15 @@ class PostsContainer extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		posts: state.posts,
+		searchField: state.searchField,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return bindActionCreators({ setPosts: setPosts }, dispatch);
+	return bindActionCreators(
+		{ setPosts: setPosts, deletePost: deletePost },
+		dispatch
+	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

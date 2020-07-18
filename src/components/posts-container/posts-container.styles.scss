@@ -4,7 +4,7 @@ $secondary-color: teal;
 .post-container {
 	width: 100%;
 	height: 400px;
-    background-color: brown;
+    // background-color: brown;
     overflow-y: auto;
     border: 3px solid black;
     box-sizing: border-box;
@@ -32,10 +32,10 @@ $secondary-color: teal;
             
 
             &:nth-child(even) {
-                background-color: $primary-color;
+                // background-color: $primary-color;
             }
             &:nth-child(odd) {
-                background-color: $secondary-color;
+                // background-color: $secondary-color;
             }
 
 			th {

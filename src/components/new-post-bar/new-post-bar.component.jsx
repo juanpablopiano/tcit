@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
-// import { connect } from "react-redux";
-// import { createPost } from "../../redux/actions";
+
+// setup of redux
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addPost } from "../../redux/actions";
 
 import "./new-post-bar.styles.scss";
 
@@ -16,22 +19,22 @@ class NewPostBar extends React.Component {
 			name: "",
 			description: "",
 		};
-    }
-    
-    handleSubmit = async (event) => {
-        event.preventDefault();
-        
-        const name = this.state.name;
-        const description = this.state.description;
+	}
 
-        if (!name || !description) return;
+	handleSubmit = async (event) => {
+		event.preventDefault();
 
-        const body = { name, description };
+		const name = this.state.name;
+		const description = this.state.description;
 
-        axios.post("http://localhost:5000/posts", body)
+		if (!name || !description) return;
 
-        this.setState({ name: "", description: "" });
-        this.forceUpdate()
+		const body = { name, description };
+
+		const newPost = await axios.post("http://localhost:5000/posts", body);
+		this.props.addPost(newPost.data);
+
+		this.setState({ name: "", description: "" });
 	};
 
 	handleChange = (event) => {
@@ -65,10 +68,8 @@ class NewPostBar extends React.Component {
 	}
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		onCreatePost: (post) => dispatch(createPost(post))
-// 	}
-// }
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({ addPost: addPost }, dispatch);
+};
 
-export default (NewPostBar);
+export default connect(null, mapDispatchToProps)(NewPostBar);

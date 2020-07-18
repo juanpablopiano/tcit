@@ -1,5 +1,6 @@
 const initialState = {
 	posts: [],
+	searchField: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -7,8 +8,25 @@ const reducer = (state = initialState, action) => {
 		case "SET_POSTS":
 			return {
 				...state,
-				posts: action.posts
+				posts: action.posts,
 			};
+		case "DELETE_POST":
+			return {
+				...state,
+				posts: state.posts.filter(
+					(post) => post.postId !== action.postId
+				),
+			};
+		case "ADD_POST":
+			return {
+				...state,
+				posts: [...state.posts, action.post],
+			};
+		case "CHANGE_SEARCH_FIELD":
+			return {
+				...state,
+				searchField: action.text
+			}
 		default:
 			return state;
 	}
