@@ -11,10 +11,20 @@ import "./posts-container.styles.scss";
 import Post from "../post/post.component";
 
 class PostsContainer extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			loading: false,
+		};
+	}
+
 	async componentDidMount() {
+		this.setState({ loading: true });
 		try {
 			const posts = await axios.get("http://localhost:5000/posts");
 			this.props.setPosts(posts.data);
+			this.setState({ loading: false });
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -33,34 +43,28 @@ class PostsContainer extends React.Component {
 
 	render() {
 		const { searchField, posts } = this.props;
-		const filteredPosts = posts.filter((post) =>
+		let filteredPosts = posts.filter((post) =>
 			post.name.toLowerCase().includes(searchField.toLowerCase())
 		);
 		return (
 			<div className="post-container">
-				<table>
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Descripción</th>
-							<th>Acción</th>
-						</tr>
-					</thead>
-					<tbody>
-						{filteredPosts.map(
-							({ id, name, description }) => (
-								<Post
-									key={id}
-									name={name}
-									description={description}
-									onDelete={() =>
-										this.handleDeletePost(id)
-									}
-								/>
-							)
-						)}
-					</tbody>
-				</table>
+				<div className="post-header">
+					<div className="post-row">
+						<div className="post-col">Nombre</div>
+						<div className="post-col">Descripción</div>
+						<div className="post-col">Acción</div>
+					</div>
+				</div>
+				<div className="post-body">
+					{filteredPosts.map(({ id, name, description }) => (
+						<Post
+							key={id}
+							name={name}
+							description={description}
+							onDelete={() => this.handleDeletePost(id)}
+						/>
+					))}
+				</div>
 			</div>
 		);
 	}

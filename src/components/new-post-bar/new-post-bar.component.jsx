@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addPost } from "../../redux/actions";
 
-import "./new-post-bar.styles.scss";
-
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+import Navbar from "react-bootstrap/Navbar";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class NewPostBar extends React.Component {
 	constructor() {
@@ -45,25 +47,37 @@ class NewPostBar extends React.Component {
 
 	render() {
 		return (
-			<div className="new-post-bar">
-				<form onSubmit={this.handleSubmit}>
-					<FormInput
-						name="name"
-						type="text"
-						handleChange={this.handleChange}
-						value={this.state.name}
-						label="Nombre"
-					/>
-					<FormInput
-						name="description"
-						type="text"
-						handleChange={this.handleChange}
-						value={this.state.description}
-						label="Descripción"
-					/>
-					<CustomButton type="submit">Crear</CustomButton>
-				</form>
-			</div>
+			<Navbar expand="lg" >
+				<Form inline onSubmit={this.handleSubmit}>
+					<Row>
+						<Col>
+							<FormControl
+								type="text"
+								placeholder="Nombre"
+								name="name"
+								className="mr-sm-2"
+								value={this.state.name}
+								onChange={this.handleChange}
+							/>
+						</Col>
+						<Col>
+							<FormControl
+								type="text"
+								placeholder="Descripción"
+								name="description"
+								className="mr-sm-2"
+								value={this.state.description}
+								onChange={this.handleChange}
+							/>
+						</Col>
+						<Col>
+							<Button type="submit" variant="dark">
+								Crear
+							</Button>
+						</Col>
+					</Row>
+				</Form>
+			</Navbar>
 		);
 	}
 }

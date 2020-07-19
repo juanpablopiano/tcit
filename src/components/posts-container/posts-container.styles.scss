@@ -3,61 +3,25 @@ $secondary-color: rgb(159, 187, 240);
 
 .post-container {
 	width: 100%;
-    background-color: cornflowerblue;
-    overflow-y: auto;
-    border: 3px solid black;
-    box-sizing: border-box;
-    overflow: hidden;
+	background-color: cornflowerblue;
+	height: 450px;
+	border: 3px solid black;
+	box-sizing: border-box;
 
-	table {
-        width: 100%;
-        border-collapse: collapse;
+	display: flex;
+	flex-direction: column;
 
-        thead {
-            display: table;
-            width: 100%;
-        }
-        tbody {
-            display: block;
-            width: 100%;
-            max-height: 360px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-		tr {
-            height: 30px;
-            width: 100%;
-            display: table;
-            
+	.post-header {
+		background-color: cornflowerblue;
 
-            &:nth-child(even) {
-                background-color: $primary-color;
-            }
-            &:nth-child(odd) {
-                background-color: $secondary-color;
-            }
+		border-bottom: 3px solid black;
 
-			th {
-				background-color: cornflowerblue;
-			}
-			td, th {
-				text-align: left;
-                padding: 10px;
-                border-right: 3px solid black;
-                box-sizing: border-box;
-
-                &:nth-child(1) {
-                    width: 150px;
-                }
-                &:nth-child(2) {
-                    width: 700px;
-                    min-width: 60%;
-                }
-                &:last-child {
-                    border-right: none;
-                }
-            }
-            
+		.post-col {
+			border-right: none;
+			font-weight: 700;
 		}
+	}
+	.post-body {
+		overflow: auto;
 	}
 }

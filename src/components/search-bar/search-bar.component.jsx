@@ -1,14 +1,13 @@
 import React from "react";
 
-import "./search-bar.styles.scss";
-
 // setup of redux
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { changeSearchField } from "../../redux/actions";
 
-import CustomButton from "../custom-button/custom-button.component";
-import FormInput from "../form-input/form-input.component";
+import Navbar from "react-bootstrap/Navbar";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 
 class SearchBar extends React.Component {
 	constructor() {
@@ -33,18 +32,17 @@ class SearchBar extends React.Component {
 
 	render() {
 		return (
-			<div className="search-bar">
-				<form onSubmit={this.handleSubmit}>
-					<FormInput
-						name="searchText"
+			<Navbar expand="lg">
+				<Form inline>
+					<FormControl
 						type="text"
-						handleChange={this.handleChange}
+						placeholder="Filtro de nombre"
+						className="mr-sm-2"
 						value={this.props.searchField}
-						label="Filtro de Nombre"
+						onChange={this.handleChange}
 					/>
-					<CustomButton type="submit">Buscar</CustomButton>
-				</form>
-			</div>
+				</Form>
+			</Navbar>
 		);
 	}
 }

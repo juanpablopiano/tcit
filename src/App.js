@@ -3,12 +3,14 @@ import "./App.css";
 
 import HomePage from "./pages/homepage/homepage.component";
 
+import Container from "react-bootstrap/Container";
+
 function App() {
 	return (
 		<div className="App">
-			<div className="container">
+			<Container>
 				<HomePage />
-			</div>
+			</Container>
 		</div>
 	);
 }

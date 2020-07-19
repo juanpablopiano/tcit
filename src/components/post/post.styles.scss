@@ -1,0 +1,41 @@
+$primary-color: rgb(211, 221, 240);
+$secondary-color: rgb(159, 187, 240);
+
+.post-row {
+	height: 50px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+
+	&.post {
+		&:nth-child(even) {
+            background-color: $primary-color;
+        }
+        &:nth-child(odd) {
+            background-color: $secondary-color;
+        }
+	}
+
+	.post-col {
+		display: flex;
+		align-items: center;
+		border-right: 3px solid black;
+		padding: 10px;
+        font-size: 18px;
+        overflow: hidden;
+
+        &:nth-child(1) {
+            flex: 1;
+        }
+        &:nth-child(2) {
+            flex: 4;
+        }
+        &:nth-child(3) {
+            flex: 1;
+        }
+
+		&:last-child {
+			border: none;
+		}
+	}
+}
